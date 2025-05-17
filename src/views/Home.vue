@@ -100,6 +100,7 @@ const detectDateTimePattern = (content) => {
         /^((\d{1,2}\/\d{1,2}\/\d{2}),.(\d{1,2}:\d{2}.[AP]M))/,
         /^((\d{1,2}\/\d{1,2}\/\d{2}),.(\d{2}:\d{2}))/,
         /^((\d{1,2}\/\d{1,2}\/\d{2}),.(\d{1,2}:\d{2}.[ap]m))/,
+        /^((\d{1,2}\/\d{1,2}\/\d{4}),.(\d{1,2}:\d{2}.[ap]m))/gm
     ]
 
     const firstLine = content.split('\n')[0]
@@ -195,11 +196,22 @@ const displayError = (msg) => {
 }
 
 function convertDDMMYYtoMMDDYY(dateStr, index) {
-    if (index == 2) {
-        const [day, month, year] = dateStr.split('/')
-        return `${month}/${day}/${year}`
+    switch (index) {
+        case 2:
+            {
+                const [day, month, year] = dateStr.split('/');
+                return `${month}/${day}/${year}`;
+            }
+        case 3:
+            {
+                const [day, month, year] = dateStr.split('/');
+                const shortYear = year.slice(-2);
+                return `${month}/${day}/${shortYear}`;
+            }
+        default:
+            return dateStr;
     }
-    return dateStr
 }
+
 
 </script>

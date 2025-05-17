@@ -2,12 +2,16 @@
     <v-container class="fill-height text-center justify-center flex-column pa-0">
         <v-sheet>
             <v-form v-model="valid" @submit.prevent="processFile">
-                <v-card-item>
-                    <img src="/icon.svg" alt="WhatsApp Icon" height="48" />
-                    <v-card-title class="text-h5 text-wrap text-primary font-weight-bold text-center">
-                        WHATSAPP CHAT ANALYZER
-                    </v-card-title>
-                </v-card-item>
+
+                <v-row justify="center">
+                    <v-col cols="12" class="text-center">
+                        <img src="/icon.svg" alt="WhatsApp Icon" height="48" />
+                        <h1 class="text-h5 text-primary font-weight-bold text-center">
+                            WHATSAPP CHAT ANALYZER
+                        </h1>
+                    </v-col>
+                </v-row>
+
                 <v-card-text>
                     <v-file-input v-model="file" prepend-icon="" prepend-inner-icon="mdi-file-upload" accept=".zip,.txt"
                         :rules="rules" clearable label="WhatsApp Chat [.zip/.txt]" variant="outlined"

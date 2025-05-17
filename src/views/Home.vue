@@ -3,7 +3,7 @@
         <v-sheet>
             <v-form v-model="valid" @submit.prevent="processFile">
                 <v-card-item>
-                    <img src="/wca/wca.svg" alt="WhatsApp Icon" height="48" />
+                    <img src="/icon.svg" alt="WhatsApp Icon" height="48" />
                     <v-card-title class="text-h5 text-wrap text-primary font-weight-bold text-center">
                         WHATSAPP CHAT ANALYZER
                     </v-card-title>

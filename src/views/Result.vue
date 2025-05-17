@@ -5,7 +5,7 @@
             <!-- Title -->
             <v-row justify="center">
                 <v-col cols="12" class="text-center">
-                    <img src="/wca/wca.svg" alt="WhatsApp Icon" height="48" />
+                    <img src="/icon.svg" alt="WhatsApp Icon" height="48" />
                     <h1 class="text-h5 text-primary font-weight-bold text-center">
                         WHATSAPP CHAT ANALYZER
                     </h1>

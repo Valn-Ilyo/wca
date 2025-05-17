@@ -9,14 +9,14 @@
 <style>
 @font-face {
     font-family: "Futura";
-    src: url("./FuturaPTBold.otf") format("opentype");
+    src: url("/FuturaPTBold.otf") format("opentype");
     font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Futura";
-    src: url("./FuturaPTBook.otf") format("opentype");
+    src: url("/FuturaPTBook.otf") format("opentype");
     font-weight: 400;
     font-style: normal;
 }

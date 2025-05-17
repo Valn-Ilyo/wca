@@ -238,9 +238,8 @@ const activityChartOptions = {
         datalabels: {
             color: '#F9F6F1',
             formatter: (value, ctx) => `${roundedPercentages[ctx.dataIndex]}%`,
-            anchor: 'end',
-            align: 'left',
-            clamp: true
+            clamp: true,
+            clip: false
         }
     },
     scales: {

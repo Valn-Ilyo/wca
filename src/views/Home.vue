@@ -97,20 +97,29 @@ const analyzeChatContent = (content) => {
 
 const detectDateTimePattern = (content) => {
     const patterns = [
-        /^((\d{1,2}\/\d{1,2}\/\d{2}),\s(\d{1,2}:\d{2}.[AP]M))/,
-        /^((\d{1,2}\/\d{1,2}\/\d{2}),\s(\d{2}:\d{2}))/,
+        /^((\d{1,2}\/\d{1,2}\/\d{2}),.(\d{1,2}:\d{2}.[AP]M))/,
+        /^((\d{1,2}\/\d{1,2}\/\d{2}),.(\d{2}:\d{2}))/,
+        /^((\d{1,2}\/\d{1,2}\/\d{2}),.(\d{1,2}:\d{2}.[ap]m))/,
     ]
-    return patterns.find(p => p.test(content.split('\n')[0])) || null
+
+    const firstLine = content.split('\n')[0]
+    for (let i = 0; i < patterns.length; i++) {
+        if (patterns[i].test(firstLine)) {
+            return { pattern: patterns[i], index: i }
+        }
+    }
+    return null
 }
 
+
 const extractChatAnalytics = (content, dateTimePattern) => {
-    const pattern = new RegExp(dateTimePattern.source + '\\s-\\s(.*?):', 'gm')
+    const pattern = new RegExp(dateTimePattern.pattern.source + '\\s-\\s(.*?):', 'gm')
     const matches = [...content.matchAll(pattern)]
 
     const analytics = {
-        startDate: new Date(matches[0][2]).toDateString(),
-        endDate: new Date(matches[matches.length - 1][2]).toDateString(),
-        totalDays: calculateDateDifference(matches[0][2], matches[matches.length - 1][2]),
+        startDate: new Date(convertDDMMYYtoMMDDYY(matches[0][2], dateTimePattern.index)).toDateString(),
+        endDate: new Date(convertDDMMYYtoMMDDYY(matches[matches.length - 1][2], dateTimePattern.index)).toDateString(),
+        totalDays: calculateDateDifference(convertDDMMYYtoMMDDYY(matches[0][2], dateTimePattern.index), convertDDMMYYtoMMDDYY(matches[matches.length - 1][2], dateTimePattern.index)),
         activeDays: 0,
         messageCount: matches.length,
         participants: {},
@@ -120,6 +129,8 @@ const extractChatAnalytics = (content, dateTimePattern) => {
     processMessages(matches, analytics)
     return analytics
 }
+
+
 
 const processMessages = (messages, analytics) => {
     let previousDate = '', previousUser = '', previousTimestamp = null
@@ -182,4 +193,13 @@ const displayError = (msg) => {
     alert.value = true
     analyzing.value = false
 }
+
+function convertDDMMYYtoMMDDYY(dateStr, index) {
+    if (index == 2) {
+        const [day, month, year] = dateStr.split('/')
+        return `${month}/${day}/${year}`
+    }
+    return dateStr
+}
+
 </script>

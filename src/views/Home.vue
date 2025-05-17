@@ -1,5 +1,5 @@
 <template>
-    <v-container class="fill-height text-center justify-center flex-column">
+    <v-container class="fill-height text-center justify-center flex-column pa-0">
         <v-sheet>
             <v-form v-model="valid" @submit.prevent="processFile">
                 <v-card-item>
